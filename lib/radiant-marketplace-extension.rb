@@ -1,9 +1,9 @@
 module RadiantMarketplaceExtension
-  VERSION     = "1.0.0"
+  VERSION     = "1.0.1"
   SUMMARY     = "Marketplace for Radiant CMS"
-  DESCRIPTION = "Makes Radiant better by adding marketplace!"
-  URL         = "http://example.com/marketplace"
-  AUTHORS     = ["Your Name"]
-  EMAIL       = ["your email"]
+  DESCRIPTION = "This is part of the NZFFA members management system"
+  URL         = "https://github.com/nzffa/marketplace"
+  AUTHORS     = ["Craig Ambrose", "Robert Guthrie", "Benny Degezelle"]
+  EMAIL       = ["benny@gorilla-webdesign.be"]
 
 end
