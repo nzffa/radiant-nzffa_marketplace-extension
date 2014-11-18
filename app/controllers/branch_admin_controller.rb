@@ -10,6 +10,7 @@ class BranchAdminController < MarketplaceController
     respond_to do |format|
       format.html
       format.csv { render_csv_of_readers }
+      format.xls { render_xls_of_readers }
     end
   end
 
@@ -29,6 +30,7 @@ class BranchAdminController < MarketplaceController
     respond_to do |format|
       format.html { render :index }
       format.csv { render_csv_of_readers }
+      format.xls { render_xls_of_readers }
     end
   end
 
@@ -50,6 +52,7 @@ class BranchAdminController < MarketplaceController
     respond_to do |format|
       format.html { render :index }
       format.csv { render_csv_of_readers }
+      format.xls { render_xls_of_readers }
     end
   end
 
@@ -62,6 +65,7 @@ class BranchAdminController < MarketplaceController
     respond_to do |format|
       format.html { render :index }
       format.csv { render_csv_of_readers }
+      format.xls { render_xls_of_readers }
     end
   end
 
@@ -116,5 +120,22 @@ class BranchAdminController < MarketplaceController
     headers["Content-Type"] ||= 'text/csv'
     headers["Content-Disposition"] = "attachment; filename=\"#{@group.name}_#{action_name}_#{DateTime.now.to_s}\""
     render :text => csv_string
+  end
+  
+  def render_xls_of_readers()
+    require 'spreadsheet'
+    book = Spreadsheet::Workbook.new
+    sheet = book.create_worksheet :name => 'Readers export'
+    columns = %w(nzffa_membership_id name email phone postal_address_string)
+        
+    sheet.row(0).replace(columns.map{|k| k.capitalize})
+    
+    @readers.each_with_index do |reader, i|
+      sheet.row(i+1).replace(columns.map {|k| reader.send(k)})
+    end
+    
+    tmp_file = Tempfile.new("readers_export")
+    book.write tmp_file
+    send_file tmp_file
   end
 end

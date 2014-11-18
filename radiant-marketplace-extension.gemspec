@@ -17,6 +17,8 @@ Gem::Specification.new do |s|
   # s.add_dependency "something", "~> 1.0.0"
   # s.add_dependency "radiant-some-extension", "~> 1.0.0"
 
+  s.add_dependency "spreadsheet"
+
   ignores = if File.exist?('.gitignore')
     File.read('.gitignore').split("\n").inject([]) {|a,p| a + Dir[p] }
   else

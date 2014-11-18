@@ -14,7 +14,10 @@
 =link_to "Email current members", branch_admin_email_path(params[:group_id])
 %br
 
-=link_to "Download CSV (for Excel)", url_for(:format => :csv)
+=link_to "Download CSV", url_for(:format => :csv)
+
+=link_to "Download XLS (for Excel)", url_for(:format => :xls)
+
 %br
 
 %table{:class => 'px1'}
