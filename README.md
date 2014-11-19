@@ -1,6 +1,6 @@
 # Marketplace
 
-A Radiant CMS extension that adds group subscription fees and a marketplace to the NZFFA member management system. Our conference extension integrates with Readers using readers groups. Registered readers can subscribe for conference themselves via PxPay or the registrant (conference secretary) can register readers who send in the paper registration form and pay by other means. This extension provides registration for whole of conference or day options.
+A Radiant CMS extension that adds reader group subscription levies and a marketplace to the NZFFA member management system. Front-end administration login is provided for each group secretary to access and edit records within group directories.
 
 ## License
  
