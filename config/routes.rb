@@ -33,6 +33,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.membership_details '/membership/details', :controller => :membership, :action => :details
   map.register_membership '/membership/register', :controller => :membership, :action => :register
+  map.update_membership '/membership/update', :controller => :membership, :action => :update
 
   map.join_fft_button '/membership/join-fft-button', :controller => :membership, :action => :join_fft_button
   map.join_fft '/membership/join-fft', :controller => :membership, :action => :join_fft

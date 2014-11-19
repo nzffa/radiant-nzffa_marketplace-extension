@@ -18,6 +18,7 @@ class MarketplaceExtension < Radiant::Extension
   def activate
     # this seem to work as a method to overwrite the readers views
     Reader.send :include, ReaderMixin
+    AccountsController.send :include, Marketplace::AccountsControllerExtension
 
     Page.class_eval { include Marketplace }
     tab 'Readers' do

@@ -2,7 +2,7 @@ class MembershipController < MarketplaceController
   include UpdateReaderNewsletterPreferences
   radiant_layout "no_layout"
   AFTER_SIGNUP_PATH = '/become-a-nzffa-member/youre-registered'
-  before_filter :require_current_reader, :only => :details
+  before_filter :require_current_reader, :only => [:details, :update]
 
   def details
     @reader = current_reader
@@ -22,14 +22,7 @@ class MembershipController < MarketplaceController
   def register
     if params[:reader]
       # form has been submitted
-      if @reader = current_reader
-        # just updating their details
-        if @reader.update_attributes(params[:reader])
-          update_newsletter_preference
-          flash[:notice] = "Updated your details. #{@newsletter_alert} #{@fft_alert}"
-          redirect_to MEMBER_PATH
-        end
-      else
+      if !current_reader
         # new member
         @reader = Reader.new(params[:reader])
         if @reader.save
@@ -39,16 +32,21 @@ class MembershipController < MarketplaceController
           flash[:notice] = "Thanks for registering with the NZFFA. #{@newsletter_alert} #{@fft_alert}"
           redirect_to AFTER_SIGNUP_PATH
         end
+      elsif !current_reader.is_secretary
+        redirect_to membership_update_path
       end
     else
-      @reader = current_reader || Reader.new
+      @reader = Reader.new
     end
 
     render :layout => false if request.xhr?
   end
-
+  
+  def update
+    @reader = current_reader
+  end
+  
   # dean wants this left in the code for a bit
-  #
   def join_fft_button
     @reader = current_reader
     render :layout => false if request.xhr?
