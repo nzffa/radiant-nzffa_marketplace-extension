@@ -134,8 +134,9 @@ class BranchAdminController < MarketplaceController
       sheet.row(i+1).replace(columns.map {|k| reader.send(k)})
     end
     
-    tmp_file = Tempfile.new("readers_export")
-    book.write tmp_file
-    send_file tmp_file
+    filename = 'readers_export'
+    tmp_file = Tempfile.new(filename)
+    book.write tmp_file.path
+    send_file tmp_file.path, :filename => filename
   end
 end
