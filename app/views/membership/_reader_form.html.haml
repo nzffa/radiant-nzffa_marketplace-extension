@@ -1,4 +1,4 @@
--form_for(@reader, :url => @url) do |f|
+- form_for(:reader, {:url => @url}) do |f|
   %p=f.error_messages
   - unless @reader.new_record?
     %p You are registered.
@@ -72,11 +72,11 @@
   
   %p
     =check_box_tag :receive_small_scale_forest_grower_newsletter, "1", @reader.new_record? ? true : @reader.group_ids.include?(NzffaSettings.small_scale_forest_grower_newsletter_group_id)
-    =label_tag :receive_small_scale_forest_grower_newsletter, 'Receive small scale forest grower Newsletter'
+    =label_tag :receive_small_scale_forest_grower_newsletter, 'Receive Small Scale Forest Grower Newsletter'
 
   %p
     =check_box_tag :receive_forest_grower_levy_payer_newsletter, "1", @reader.new_record? ? true : @reader.group_ids.include?(NzffaSettings.forest_grower_levy_payer_newsletter_group_id)
-    =label_tag :receive_forest_grower_levy_payer_newsletter, 'Receive forest grower levy payer Newsletter'
+    =label_tag :receive_forest_grower_levy_payer_newsletter, 'Receive Forest Grower Levy Payer Newsletter'
 
   %p
     -if @reader.new_record?

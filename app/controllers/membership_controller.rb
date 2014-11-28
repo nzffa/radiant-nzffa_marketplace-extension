@@ -33,7 +33,20 @@ class MembershipController < MarketplaceController
           redirect_to AFTER_SIGNUP_PATH
         end
       elsif !current_reader.is_secretary
-        redirect_to membership_update_path
+        redirect_to update_membership_path
+      else
+        @reader = Reader.new(params[:reader])
+        @reader.clear_password = params[:reader][:password]
+
+        if (@reader.valid?)
+          @reader.activated_at = DateTime.now
+          update_newsletter_preference
+          @reader.save!
+          flash[:notice] = "Registration of #{@reader.name} was succesful."
+          redirect_to '/account'
+        else
+          @reader.email_field = session[:email_field]
+        end
       end
     else
       @reader = Reader.new
@@ -44,6 +57,17 @@ class MembershipController < MarketplaceController
   
   def update
     @reader = current_reader
+    
+    if params[:reader]
+      # form has been submitted
+      @reader.update_attributes(params[:reader])
+      if @reader.save
+        update_newsletter_preference
+        redirect_to AFTER_SIGNUP_PATH
+      end
+    end
+
+    render :layout => false if request.xhr?
   end
   
   # dean wants this left in the code for a bit
