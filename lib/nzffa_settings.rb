@@ -20,7 +20,9 @@ class NzffaSettings
               presidents_group_id
               secretarys_group_id
               treasurers_group_id 
-              past_members_group_id ]
+              past_members_group_id
+              small_scale_forest_grower_newsletter_group_id
+              forest_grower_levy_payer_newsletter_group_id ]
 
   class << self
     NAMES.each do |name|
@@ -71,4 +73,7 @@ class NzffaSettings
 
   @fft_newsletter_group_id = 230
   @nzffa_members_newsletter_group_id = 211
+  @small_scale_forest_grower_newsletter_group_id = 255
+  @forest_grower_levy_payer_newsletter_group_id = 250
+  
 end
