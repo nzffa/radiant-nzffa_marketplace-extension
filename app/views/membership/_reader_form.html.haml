@@ -75,10 +75,6 @@
     =label_tag :receive_small_scale_forest_grower_newsletter, 'Receive Small Scale Forest Grower Newsletter'
 
   %p
-    =check_box_tag :receive_forest_grower_levy_payer_newsletter, "1", @reader.new_record? ? true : @reader.group_ids.include?(NzffaSettings.forest_grower_levy_payer_newsletter_group_id)
-    =label_tag :receive_forest_grower_levy_payer_newsletter, 'Receive Forest Grower Levy Payer Newsletter'
-
-  %p
     -if @reader.new_record?
       =f.submit 'Signup'
     -else
