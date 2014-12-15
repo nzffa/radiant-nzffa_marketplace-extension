@@ -63,7 +63,7 @@ class MembershipController < MarketplaceController
       @reader.update_attributes(params[:reader])
       if @reader.save
         update_newsletter_preference
-        redirect_to AFTER_SIGNUP_PATH
+        redirect_to '/account'
       end
     end
 
