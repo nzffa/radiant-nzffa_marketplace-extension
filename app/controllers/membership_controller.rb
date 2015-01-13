@@ -30,7 +30,7 @@ class MembershipController < MarketplaceController
           update_newsletter_preference
           MembershipMailer.deliver_registration_email(params[:reader])
           flash[:notice] = "Thanks for registering with the NZFFA. #{@newsletter_alert} #{@fft_alert}"
-          redirect_to '/account'
+          redirect_to '/membership/details/'
         end
       elsif !current_reader.is_secretary
         redirect_to update_membership_path
@@ -43,7 +43,7 @@ class MembershipController < MarketplaceController
           update_newsletter_preference
           @reader.save!
           flash[:notice] = "Registration of #{@reader.name} was succesful."
-          redirect_to '/account'
+          redirect_to '/membership/details/'
         else
           @reader.email_field = session[:email_field]
         end
@@ -63,7 +63,7 @@ class MembershipController < MarketplaceController
       @reader.update_attributes(params[:reader])
       if @reader.save
         update_newsletter_preference
-        redirect_to '/account'
+        redirect_to '/membership/details/'
       end
     end
 
