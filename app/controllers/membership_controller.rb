@@ -43,7 +43,8 @@ class MembershipController < MarketplaceController
           update_newsletter_preference
           @reader.save!
           flash[:notice] = "Registration of #{@reader.name} was succesful."
-          redirect_to '/membership/details/'
+          # TODO: untie this from conference extension;
+          redirect_to '/conference_subscriptions/invite/'
         else
           @reader.email_field = session[:email_field]
         end
