@@ -128,13 +128,14 @@ class BranchAdminController < MarketplaceController
     sheet = book.create_worksheet :name => 'Readers export'
     columns = %w(nzffa_membership_id name email phone postal_address_string)
         
-    sheet.row(0).replace(columns.map{|k| k.capitalize})
+    sheet.row(0).replace(["#{@group.name} downloaded #{Time.now.strftime("%Y-%m-%d")}"])
+    sheet.row(1).replace(columns.map{|k| k.capitalize})
     
     @readers.each_with_index do |reader, i|
-      sheet.row(i+1).replace(columns.map {|k| reader.send(k)})
+      sheet.row(i+2).replace(columns.map {|k| reader.send(k)})
     end
     
-    filename = 'readers_export'
+    filename = "#{@group.name}-#{Time.now.strftime("%Y-%m-%d")}.xls"
     tmp_file = Tempfile.new(filename)
     book.write tmp_file.path
     send_file tmp_file.path, :filename => filename
