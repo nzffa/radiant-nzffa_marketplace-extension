@@ -83,7 +83,7 @@ namespace :radiant do
           unless removed_ids.empty?
             puts "Removed #{removed_ids.inspect} from reader_id: #{reader.id}"
           end
-          if added_ids.present?
+          if added_ids.any?
             puts "added #{added_ids.inspect} to reader_id: #{reader.id}"
           end
         end 

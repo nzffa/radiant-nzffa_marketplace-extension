@@ -2,8 +2,8 @@ class AppliesSubscriptionGroups
   def self.apply(subscription, reader)
 
     #remove past members group if it exists
-    if reader.group_ids.include? NzffaSettings.past_members_group_id
-      reader.group_ids.delete(NzffaSettings.past_members_group_id)
+    if reader.groups.include? NzffaSettings.past_members_group_id
+      reader.groups.delete Group.find(NzffaSettings.past_members_group_id)
     end
 
     if subscription.belong_to_fft?
@@ -50,15 +50,14 @@ class AppliesSubscriptionGroups
     group_ids << NzffaSettings.tree_grower_magazine_group_id
     group_ids << NzffaSettings.tree_grower_magazine_australia_group_id
     group_ids << NzffaSettings.tree_grower_magazine_everywhere_else_group_id
-    group_ids << ActionGroup.all.map(&:group_id)
-    group_ids << Branch.all.map(&:group_id)
+    group_ids.concat ActionGroup.all.map(&:group_id)
+    group_ids.concat Branch.all.map(&:group_id)
 
 
     group_ids.each do |group_id|
       Membership.find(:all, :conditions => {:group_id => group_id, :reader_id => reader.id}).each(&:destroy)
     end
 
-    reader.group_ids << NzffaSettings.past_members_group_id
-    reader.save
+    reader.groups << Group.find(NzffaSettings.past_members_group_id)
   end
 end
