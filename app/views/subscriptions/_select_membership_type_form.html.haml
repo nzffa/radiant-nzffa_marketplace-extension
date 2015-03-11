@@ -1,6 +1,6 @@
 %h2 Select Membership Type
 
-%p Please select one of the two classes of subscription available. On the next page you will get the opportinuty to configure your subscription details.
+%p Please select one of the two classes of subscription available. On the next page you will get the opportunity to configure your subscription details.
 
 -form_for(@subscription, :url => '', :html => {:method => :get}) do |f|
   =f.radio_button :membership_type, 'full'
@@ -29,7 +29,7 @@
       Subscribe to
       %b NZ Treegrower magazine
     %li
-      Ability to join
+      Join
       %b Farm Forestry Timbers and list your products and services in the marketplace
   %p
     =f.submit 'Next'
