@@ -1,10 +1,10 @@
 class MarketplaceController < SiteController
-  MY_ADVERTS_PATH = 'adverts/my_adverts'
-  MARKETPLACE_PATH = '/adverts'
+  MY_ADVERTS_PATH = '/specialty-timber-market/marketplace/my-adverts/'
+  MARKETPLACE_PATH = '/specialty-timber-market/marketplace'
   MEMBER_PATH = '/account'
   REGISTER_PATH = '/membership/register'
   JOIN_FFT_PATH = '/specialty-timber-market/join-fft'
-  EDIT_COMPANY_LISTING_PATH = '/adverts/edit_company_listing'
+  EDIT_COMPANY_LISTING_PATH = '/specialty-timber-market/marketplace/edit-company-listing'
   FFT_MEMBERS_AREA_PATH = '/specialty-timber-market/participate/membership'
   #NEWSLETTER_GROUP_ID = NzffaSettings.fft_newsletter_group_id
   #FFT_GROUP_ID = NzffaSettings.fft_marketplace_group_id
