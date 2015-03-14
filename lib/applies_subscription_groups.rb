@@ -14,6 +14,7 @@ class AppliesSubscriptionGroups
       when 'full'
         reader.groups << Group.find(NzffaSettings.full_membership_group_id)
         reader.groups << Group.find(NzffaSettings.tree_grower_magazine_group_id)
+        reader.memberships.find_all_by_group_id(NzffaSettings.small_scale_forest_grower_newsletter_group_id).each(&:destroy)
 
         subscription.branches.each do |branch|
           reader.groups << branch.group unless branch.group.nil?
