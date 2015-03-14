@@ -60,7 +60,7 @@ class BranchAdminController < MarketplaceController
     # because fft is not a branch on the subscription, we have to look at the subscription column belong_to_fft
     all_fft_readers = Subscription.active_anytime.find(:all, :conditions => {:belong_to_fft => true}).map(&:reader).uniq
     current_fft_readers = Subscription.active.find(:all, :conditions => {:belong_to_fft => true}).map(&:reader).uniq
-    @readers = all_fft_readers - current_fft_readers
+    @readers = (all_fft_readers - current_fft_readers).compact
 
     respond_to do |format|
       format.html { render :index }
