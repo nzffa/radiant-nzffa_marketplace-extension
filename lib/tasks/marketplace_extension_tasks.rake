@@ -84,7 +84,7 @@ namespace :radiant do
             puts "Removed #{removed_ids.inspect} from reader_id: #{reader.id}"
           end
           if added_ids.any?
-            puts "added #{added_ids.inspect} to reader_id: #{reader.id}"
+            puts "Added #{added_ids.inspect} to reader_id: #{reader.id}"
           end
         end 
       end
