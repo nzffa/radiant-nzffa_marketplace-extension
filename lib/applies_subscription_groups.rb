@@ -44,33 +44,29 @@ class AppliesSubscriptionGroups
   def self.remove(subscription, reader = nil)
     # Is only ever called from rake task, not from controller
     reader = subscription if reader.nil?
+    # find old subscription and add to 'swap' groups
+    group_ids_to_delete = []
+    group_ids_to_delete << NzffaSettings.fft_marketplace_group_id
+    group_ids_to_delete << NzffaSettings.full_membership_group_id
+    group_ids_to_delete << NzffaSettings.tree_grower_magazine_group_id
+    group_ids_to_delete << NzffaSettings.tree_grower_magazine_australia_group_id
+    group_ids_to_delete << NzffaSettings.tree_grower_magazine_everywhere_else_group_id
+    group_ids_to_delete.concat ActionGroup.all.map(&:group_id)
+    group_ids_to_delete.concat Branch.all.map(&:group_id)
     
-    unless subscription = reader.active_subscription
-      # find old subscription and add to 'swap' groups
-      group_ids_to_delete = []
-      group_ids_to_delete << NzffaSettings.fft_marketplace_group_id
-      group_ids_to_delete << NzffaSettings.full_membership_group_id
-      group_ids_to_delete << NzffaSettings.tree_grower_magazine_group_id
-      group_ids_to_delete << NzffaSettings.tree_grower_magazine_australia_group_id
-      group_ids_to_delete << NzffaSettings.tree_grower_magazine_everywhere_else_group_id
-      group_ids_to_delete.concat ActionGroup.all.map(&:group_id)
-      group_ids_to_delete.concat Branch.all.map(&:group_id)
-      
-      group_ids_to_add = []
-      if reader.subscriptions.any?
-        group_ids_to_add << NzffaSettings.past_members_group_id
-      end
-      if reader.group_ids.include? NzffaSettings.fft_marketplace_group_id
-        group_ids_to_add << NzffaSettings.fft_newsletter_group_id
-      end
-      
-      group_ids_to_delete.each do |group_id|
-        reader.memberships.find_by_group_id(group_id).try :destroy
-      end
-      group_ids_to_add.each do |group_id|
-        reader.memberships.create(:group_id => group_id)
-      end
+    group_ids_to_add = []
+    if reader.subscriptions.any?
+      group_ids_to_add << NzffaSettings.past_members_group_id
+    end
+    if reader.group_ids.include? NzffaSettings.fft_marketplace_group_id
+      group_ids_to_add << NzffaSettings.fft_newsletter_group_id
     end
     
+    group_ids_to_delete.each do |group_id|
+      reader.memberships.find_all_by_group_id(group_id).each(&:destroy)
+    end
+    group_ids_to_add.each do |group_id|
+      reader.memberships.create(:group_id => group_id)
+    end
   end
 end
