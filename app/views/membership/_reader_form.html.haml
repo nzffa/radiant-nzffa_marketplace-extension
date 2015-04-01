@@ -66,9 +66,9 @@
     =check_box_tag :receive_fft_newsletter, "1", @reader.new_record? ? true : @reader.group_ids.include?(NzffaSettings.fft_newsletter_group_id)
     =label_tag :receive_fft_newsletter, 'Receive Farm Forestry Timbers Newsletter'
 
-  %p
+  %p{:style => @reader.new_record? ? "display: none" : ''}
     =check_box_tag :receive_nzffa_members_newsletter, "1", @reader.new_record? ? true : @reader.group_ids.include?(NzffaSettings.nzffa_members_newsletter_group_id)
-    =label_tag :receive_nzffa_members_newsletter, 'Receive NZFFA Members Newsletter'
+    =label_tag :receive_nzffa_members_newsletter, 'Receive NZFFA newsletters via email'
   
   %p
     =check_box_tag :receive_small_scale_forest_grower_newsletter, "1", @reader.new_record? ? true : @reader.group_ids.include?(NzffaSettings.small_scale_forest_grower_newsletter_group_id)
