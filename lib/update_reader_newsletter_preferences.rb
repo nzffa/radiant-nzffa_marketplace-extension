@@ -20,7 +20,7 @@ module UpdateReaderNewsletterPreferences
     
     # Full members only
     %w(nzffa_members_newsletter).each do |group_name|
-      break unless @reader.full_nzffa_member?
+      # break unless @reader.full_nzffa_member?
       
       group = Group.find(NzffaSettings.send("#{group_name}_group_id"))
       
