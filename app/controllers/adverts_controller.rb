@@ -32,8 +32,8 @@ class AdvertsController < MarketplaceController
   end
 
   def show
-    if @advert = Advert.find_by_id(params[:id])
-      @other_listings = Advert.find(:all, :conditions => {:reader_id => @advert.reader_id})
+    if @advert = Advert.not_expired.find_by_id(params[:id])
+      @other_listings = Advert.not_expired.find(:all, :conditions => {:reader_id => @advert.reader_id})
       render :layout => false if request.xhr?
     else
       flash[:alert] = "Advert not found"
