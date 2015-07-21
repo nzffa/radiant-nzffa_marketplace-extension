@@ -36,7 +36,7 @@ class AdvertsController < MarketplaceController
       @other_listings = Advert.not_expired.find(:all, :conditions => {:reader_id => @advert.reader_id})
       render :layout => false if request.xhr?
     else
-      flash[:alert] = "Advert not found"
+      flash[:error] = "Advert not found"
       redirect_to adverts_path
     end
   end
