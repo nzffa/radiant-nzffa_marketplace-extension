@@ -1,5 +1,5 @@
 class MarketplaceController < SiteController
-  MY_ADVERTS_PATH = 'adverts/my_adverts'
+  MY_ADVERTS_PATH = '/adverts/my_adverts'
   MARKETPLACE_PATH = '/adverts'
   MEMBER_PATH = '/account'
   REGISTER_PATH = '/membership/register'
