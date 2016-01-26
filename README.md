@@ -6,4 +6,4 @@ see the [wiki](https://github.com/nzffa/radiant-nzffa_marketplace-extension/wiki
 
 ## License
  
- The NZFFA radiant-nzffa_marketplace-extension source code is released under the MIT license and is copyright (c) 2011-2014 NZFFA.
+ The NZFFA radiant-nzffa_marketplace-extension source code is released under the MIT license and is copyright (c) 2011-2016 NZFFA.
