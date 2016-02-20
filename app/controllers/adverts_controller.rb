@@ -23,7 +23,6 @@ class AdvertsController < MarketplaceController
 
   def my_adverts
     @adverts = Advert.find(:all, :conditions => {:is_company_listing => false, :reader_id => current_reader.id})
-    @membership_path = FFT_MEMBERS_AREA_PATH
     render :layout => false if request.xhr?
   end
 

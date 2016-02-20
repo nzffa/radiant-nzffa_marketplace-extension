@@ -21,4 +21,4 @@
         %td=link_to 'Delete', advert, :method => :delete, :confirm => "Really delete advert titled: '#{advert.title}'?"
 
 = link_to 'New Advert', [:new, :advert]
-= link_to 'Membership page', @membership_path
+= link_to 'Membership page', MembershipController::FFT_MEMBERS_AREA_PATH
