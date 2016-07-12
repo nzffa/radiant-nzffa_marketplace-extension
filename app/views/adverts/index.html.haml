@@ -12,7 +12,7 @@
 
 :javascript
   function load_results(){
-    $('input#page').attr('value', '1');
+    $('input#page').val('1');
     $('#table').text('Loading...');
     $.get('/adverts/index_table.js',
       $('form#query-form').serialize(),
@@ -24,10 +24,10 @@
     e.preventDefault();
     v = $(this).text();
     i = $('input#query');
-    if (i.attr('value').length == 0) {
-      i.attr('value', v);
+    if (i.val().length == 0) {
+      i.val(v)
     }else{
-      i.attr('value', i.attr('value')+' '+v);
+      i.val(i.val()+' '+v);
     }
     load_results();
   });
@@ -43,7 +43,7 @@
   $('div#table').on('click', 'th a.sortby', function(e){
     e.preventDefault();
     $('#table').text('Loading...');
-    $('input#sort').attr('value', $(this).data('column'));
+    $('input#sort').val($(this).data('column'));
     $.get('/adverts/index_table.js',
       $('form#query-form').serialize(),
       function(data){ $('#table').html(data) });
@@ -55,7 +55,7 @@
     regex = new RegExp("page=(\\d+)");
     page_num = regex.exec($(this).attr('href'))[1];
     $('#table').text('Loading page '+page_num+'...');
-    $('input#page').attr('value', page_num);
+    $('input#page').val(page_num);
     $.get('/adverts/index_table.js',
       $('form#query-form').serialize(),
       function(data){ $('#table').html(data) });
