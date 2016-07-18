@@ -13,7 +13,7 @@
 :javascript
   function load_results(){
     $('input#page').val('1');
-    $('#table').text('Loading...');
+    $('#table').html('Loading... <br/>If this message does not disappear, <strong>please try updating or disabling your ad blocker</strong>.');
     $.get('/adverts/index_table.js',
       $('form#query-form').serialize(),
       function(data){ $('#table').html(data) });
