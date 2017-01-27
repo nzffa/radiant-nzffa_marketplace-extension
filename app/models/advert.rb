@@ -25,10 +25,12 @@ class Advert < ActiveRecord::Base
   validates_attachment_size :image, :in => 1.kilobytes..5.megabytes
 
   belongs_to :reader
-  named_scope :not_expired, lambda { {:conditions => ['(adverts.expires_on > ? OR adverts.is_company_listing = ?) AND mm.group_id = ?', Date.today, true, Group.fft_group], :joins => ["INNER JOIN readers on readers.id = adverts.reader_id", "INNER JOIN memberships as mm on mm.reader_id = readers.id"] }}
+  named_scope :not_expired, lambda { {:conditions => ['(adverts.expires_on > ? OR adverts.is_company_listing = ?) AND memberships.group_id = ?', Date.today, true, Group.fft_group], :joins => [:reader => :memberships] }}
   
   named_scope :published, lambda { {:conditions => {:is_published => true}} }
 
+  named_scope :company_listings, {:conditions => {:is_company_listing => true }}
+  named_scope :not_company_listings, {:conditions => {:is_company_listing => false }}
 
   validates_presence_of :reader
   validates_presence_of :expires_on, :unless => :is_company_listing

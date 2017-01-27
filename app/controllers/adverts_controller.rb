@@ -22,7 +22,7 @@ class AdvertsController < MarketplaceController
   end
 
   def my_adverts
-    @adverts = Advert.find(:all, :conditions => {:is_company_listing => false, :reader_id => current_reader.id})
+    @adverts = current_reader.adverts.not_company_listings
     render :layout => false if request.xhr?
   end
 
