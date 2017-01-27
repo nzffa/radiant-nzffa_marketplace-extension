@@ -43,7 +43,6 @@ namespace :radiant do
         end
       end
       
-      
       desc 'Emails marketplace expiry warning emails as required'
       task :email_warnings => :environment do
         Advert.find(:all, :conditions =>

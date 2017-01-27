@@ -1,5 +1,5 @@
 .outset
-  %table#adverts.index
+  %table.index
     %thead
       %th Owner
       %th Title
@@ -8,9 +8,10 @@
       %th Expires On
       %th Actions
     %tbody
-      -@adverts.each do |advert|
+      - @adverts.each do |advert|
+        - title = advert.title.blank? ? edit_admin_advert_path(advert) : advert.title
         %tr
-          %td.name=link_to advert.title, [:edit, :admin, advert]
+          %td.name=link_to title, [:edit, :admin, advert]
           %td=advert.reader.organisation if advert.reader
           %td=advert.categories.join(', ')
           %td=advert.snippet
