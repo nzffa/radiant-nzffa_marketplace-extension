@@ -43,25 +43,25 @@
         %td
           -if advert.timber_species.present?
             %b Timber species:
-            =advert.timber_species.split(',').join(', ')
+            =advert.timber_species.join(', ')
             %br
 
           -if advert.supplier_of.present?
             %b
               %span{:class => 'listing_title supplier_of'} Supplier of:
-            =advert.supplier_of.split(',').join(', ')
+            =advert.supplier_of.join(', ')
             %br
           -if advert.timber_for_sale.present?
             %b
               %span{:class => 'listing_title timber_for_sale'} Timber for sale:
-            =advert.timber_for_sale.split(',').join(', ')
+            =advert.timber_for_sale.join(', ')
             %br
           -if advert.buyer_of.present?
             %b
               %span{:class => 'listing_title buyer_of'} Buyer of:
-            =advert.buyer_of.split(',').join(', ')
+            =advert.buyer_of.join(', ')
             %br
           -if advert.services.present?
             %b
               %span{:class => 'listing_title services'} Services:
-            =advert.services.split(',').join(', ')
+            =advert.services.join(', ')

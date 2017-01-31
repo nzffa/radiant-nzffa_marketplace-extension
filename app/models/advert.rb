@@ -15,7 +15,8 @@ class Advert < ActiveRecord::Base
             West Coast
             Otago
             Southland'.split("\n").map(&:strip)
-  default_scope :order => 'created_at DESC'
+  SERIALIZED_COLUMNS = ["timber_species", "timber_for_sale", "buyer_of", "supplier_of", "services", "categories"]
+  default_scope :order => 'updated_at DESC'
 
   has_attached_file :image,
       :styles => { :medium => "640x480>", :thumb => "120x90>" },
@@ -24,8 +25,12 @@ class Advert < ActiveRecord::Base
       :default_url => "/attachments/:attachment/missing/missing.png"
   validates_attachment_size :image, :in => 1.kilobytes..5.megabytes
 
+  SERIALIZED_COLUMNS.each do |attrib|
+    serialize attrib.to_sym
+  end
+
   belongs_to :reader
-  named_scope :not_expired, lambda { {:conditions => ['(adverts.expires_on > ? OR adverts.is_company_listing = ?) AND memberships.group_id = ?', Date.today, true, Group.fft_group], :joins => [:reader => :memberships] }}
+  named_scope :not_expired, lambda { {:conditions => ['(adverts.expires_on > ? OR adverts.is_company_listing = ?) AND groups.id = ? AND subscriptions.expires_on >= ? AND subscriptions.begins_on <= ? AND subscriptions.cancelled_on IS NULL', Date.today, true, Group.fft_group, Date.today, Date.today], :include => [:reader => [:groups, :subscriptions]], :order => "adverts.updated_at DESC" }}
   
   named_scope :published, lambda { {:conditions => {:is_published => true}} }
 
@@ -55,63 +60,6 @@ class Advert < ActiveRecord::Base
   def to_param
 		"#{id}-#{title}".gsub(/[^a-zA-Z0-9]/,"-")
 	end
-
-  def categories
-    if self[:categories]
-      self[:categories].split('|')
-    else
-      []
-    end
-  end
-
-  def timber_species_terms
-    self[:timber_species].split(', ')
-  rescue
-    []
-  end
-  
-  def timber_species_terms=(list)
-    self[:timber_species] = list.join(', ')
-  end
-
-  def timber_for_sale_terms
-    self[:timber_for_sale].split(', ')
-  rescue
-    []
-  end
-
-  def timber_for_sale_terms=(list)
-    self[:timber_for_sale] = list.join(', ')
-  end
-
-  def timber_species
-    self[:timber_species] || ''
-  end
-
-  def supplier_of
-    self[:supplier_of] || ''
-  end
-
-  def timber_for_sale
-    self[:timber_for_sale] || ''
-  end
-
-  def buyer_of
-    self[:buyer_of] || ''
-  end
-
-  def services
-    self[:services] || ''
-  end
-
-  def categories=(list)
-    if list.is_a? String
-      self[:categories] = list
-    else
-      self[:categories] = list.join '|'
-    end
-  end
-
 
   def reader_physical_address
     reader.physical_address

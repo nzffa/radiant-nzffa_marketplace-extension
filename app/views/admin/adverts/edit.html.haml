@@ -27,7 +27,7 @@
 
     %p
       =f.label :timber_species
-      =select_tag 'advert[timber_species]', options_for_select(Advert.timber_species_options.map{|o| [o,o] }), :multiple => true, :style => 'width: 300px'
+      =select_tag 'advert[timber_species]', options_for_select(Advert.timber_species_options.map{|o| [o,o] }, f.object.timber_species), :multiple => true, :style => 'width: 300px'
 
     %p
       =f.label :timber_for_sale
@@ -35,15 +35,16 @@
 
     %p
       =f.label :buyer_of
-      =select_tag 'advert[buyer_of]', options_for_select(Advert.buyer_of_options.map{|o| [o,o] }), :multiple => true, :style => 'width: 300px'
+      =select_tag 'advert[buyer_of_terms]', options_for_select(Advert.buyer_of_options.map{|o| [o,o] }, f.object.buyer_of), :multiple => true, :style => 'width: 300px'
     
     %p
       =f.label :supplier_of
-      =select_tag 'advert[supplier_of]', options_for_select(Advert.supplier_of_options.map{|o| [o,o] }), :multiple => true, :style => 'width: 300px'
+      =select_tag 'advert[supplier_of_terms]', options_for_select(Advert.supplier_of_options.map{|o| [o,o] }, f.object.supplier_of), :multiple => true, :style => 'width: 300px'
 
     %p
       =f.label :services
-      =select_tag 'advert[services]', options_for_select(Advert.services_options.map{|o| [o,o] }), :multiple => true, :style => 'width: 300px'
+      =select_tag 'advert[services]', options_for_select(Advert.services_options.map{|o| [o,o] }, f.object.services), :multiple => true, :style => 'width: 300px'
+      
   .right{:style => "width: 50%; float: right"}
     -f.fields_for :reader do |rf|
       %p
