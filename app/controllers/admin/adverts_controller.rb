@@ -1,4 +1,4 @@
-class Admin::AdvertsController < ApplicationController
+class Admin::AdvertsController < Admin::ResourceController
   only_allow_access_to :index, :new, :edit, :create, :update, :remove, :destroy,
     :when => [:admin, :designer]
 
@@ -13,19 +13,10 @@ class Admin::AdvertsController < ApplicationController
     @advert = Advert.new
   end
 
-  def show
-  end
-
-  def edit
-  end
-
   def update
     @advert.update_attributes params[:advert]
-    if @advert.valid?
-      redirect_to [:admin, :adverts], :notice => 'Updated advert'
-    else
-      render :edit
-    end
+    flash[:notice] = 'Advert updated'
+    response_for :update
   end
 
   def create
