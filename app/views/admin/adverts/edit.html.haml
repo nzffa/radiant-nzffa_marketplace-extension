@@ -31,15 +31,15 @@
 
     %p
       =f.label :timber_for_sale
-      =select_tag 'advert[timber_for_sale_terms]', options_for_select(Advert.timber_for_sale_options.map{|o| [o,o] }, f.object.timber_for_sale_terms), :multiple => true, :style => 'width: 300px'
+      =select_tag 'advert[timber_for_sale]', options_for_select(Advert.timber_for_sale_options.map{|o| [o,o] }, f.object.timber_for_sale), :multiple => true, :style => 'width: 300px'
 
     %p
       =f.label :buyer_of
-      =select_tag 'advert[buyer_of_terms]', options_for_select(Advert.buyer_of_options.map{|o| [o,o] }, f.object.buyer_of), :multiple => true, :style => 'width: 300px'
+      =select_tag 'advert[buyer_of]', options_for_select(Advert.buyer_of_options.map{|o| [o,o] }, f.object.buyer_of), :multiple => true, :style => 'width: 300px'
     
     %p
       =f.label :supplier_of
-      =select_tag 'advert[supplier_of_terms]', options_for_select(Advert.supplier_of_options.map{|o| [o,o] }, f.object.supplier_of), :multiple => true, :style => 'width: 300px'
+      =select_tag 'advert[supplier_of]', options_for_select(Advert.supplier_of_options.map{|o| [o,o] }, f.object.supplier_of), :multiple => true, :style => 'width: 300px'
 
     %p
       =f.label :services
