@@ -152,12 +152,12 @@ class AdvertsController < MarketplaceController
       find_options[:conditions] = [query, *values]
     end
 
-    find_options[:joins] = :reader
+    # find_options[:joins] = :reader
 
     order_options = { 'title'          => 'title DESC',
-                      'date'           => 'created_at DESC',
+                      'date'           => 'updated_at DESC',
                       'title_reversed' => 'title ASC',
-                      'date_reversed'  => 'created_at ASC' }
+                      'date_reversed'  => 'updated_at ASC' }
 
     if order_options[params[:sort]]
       find_options[:order] = order_options[params[:sort]]
