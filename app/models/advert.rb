@@ -16,7 +16,6 @@ class Advert < ActiveRecord::Base
             Otago
             Southland'.split("\n").map(&:strip)
   SERIALIZED_COLUMNS = ["timber_species", "timber_for_sale", "buyer_of", "supplier_of", "services", "categories"]
-  default_scope :order => 'updated_at DESC'
 
   has_attached_file :image,
       :styles => { :medium => "640x480>", :thumb => "120x90>" },
@@ -30,7 +29,7 @@ class Advert < ActiveRecord::Base
   end
 
   belongs_to :reader
-  named_scope :not_expired, lambda { {:conditions => ['(adverts.expires_on > ? OR adverts.is_company_listing = ?) AND groups.id = ? AND subscriptions.expires_on >= ? AND subscriptions.begins_on <= ? AND subscriptions.cancelled_on IS NULL', Date.today, true, Group.fft_group, Date.today, Date.today], :include => [:reader => [:groups, :subscriptions]], :order => "adverts.updated_at DESC" }}
+  named_scope :not_expired, lambda { {:conditions => ['(adverts.expires_on > ? OR adverts.is_company_listing = ?) AND groups.id = ? AND subscriptions.expires_on >= ? AND subscriptions.begins_on <= ? AND subscriptions.cancelled_on IS NULL', Date.today, true, Group.fft_group, Date.today, Date.today], :include => [:reader => [:groups, :subscriptions]] }}
   
   named_scope :published, lambda { {:conditions => {:is_published => true}} }
 
