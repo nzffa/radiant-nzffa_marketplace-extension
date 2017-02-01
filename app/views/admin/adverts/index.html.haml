@@ -13,7 +13,7 @@
         %tr
           %td.name=link_to title, [:edit, :admin, advert]
           %td=advert.reader.organisation if advert.reader
-          %td=advert.categories.join(', ')
+          %td=advert.categories.try(:join, ', ')
           %td=advert.snippet
           %td=advert.expires_on
           %td.actions=link_to image('minus') + ' ' + I18n.t('remove'), [:admin, advert], :method => :delete, :confirm => "Really delete advert?", :class => "action"
