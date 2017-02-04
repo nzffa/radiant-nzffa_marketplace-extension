@@ -128,7 +128,7 @@ class Advert < ActiveRecord::Base
   end
 
   def self.supplier_of_options
-    'Timber, logs, Sawmills, Machinery, Firewood, Trees, Structural Glulam, Glue-laminated timber panels, Outdoor furniture, Indoor furniture, Trusses'.split(', ')
+    'Timber, logs, Sawmills, Machinery, Firewood, Trees, Structural Glulam, Glue-laminated timber panels, Outdoor furniture, Indoor furniture/cabinet/joinery, Panelling/sarking, Benchtops, Trusses'.split(', ')
   end
 
   def self.timber_species_options
@@ -138,13 +138,24 @@ class Advert < ActiveRecord::Base
     Eucalypt
     Southern beech
     Totara
+    Kahikatea
+    Rimu
+    Matai
     Blackwood
+    Kauri
     Cedar
     Paulownia
     Poplar
     Oak
     Elm
+    Rata
     Spruce
+    Tawa
+    London plane
+    Sycamore
+    Larch
+    Tulipwood
+    Walnut
     Ash'.split("\n").map(&:strip)
   end
 
@@ -161,6 +172,7 @@ class Advert < ActiveRecord::Base
     Timber for furniture/joinery - graded
     Slabs
     Panelling timber - graded
+    Mouldings and architraves - graded
     Timber for structural glulam - graded'.split("\n").map(&:strip)
   end
 
@@ -174,16 +186,21 @@ class Advert < ActiveRecord::Base
     Machining and profiling
     Glue laminating
     Construction and building
+    Registered architect
     Design
     Structural engineer
+    Stress grading
     Timber merchant
     Floor laying and installation
+    Floor sanding and repairs
+    Decking installation
     Interior joinery furniture and fitouts
     Exterior joinery and furniture
     Manufacturing
     Retailer
     Cabinetmaking
-    Resawing'.split("\n").map(&:strip)
+    Resawing
+    Sustainable Forest Management plans and permits'.split("\n").map(&:strip)
   end
 
   private
