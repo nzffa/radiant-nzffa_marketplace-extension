@@ -124,11 +124,26 @@ class Advert < ActiveRecord::Base
   end
 
   def self.buyer_of_options
-    ['Timber', 'Logs', 'Standing trees', 'Firewood']
+    'Timber
+    Logs
+    Standing trees
+    Firewood'.split("\n").map(&:strip)
   end
 
   def self.supplier_of_options
-    'Timber, logs, Sawmills, Machinery, Firewood, Trees, Structural Glulam, Glue-laminated timber panels, Outdoor furniture, Indoor furniture/cabinet/joinery, Panelling/sarking, Benchtops, Trusses'.split(', ')
+    'Timber
+    logs
+    Sawmills
+    Machinery
+    Firewood
+    Trees
+    Structural Glulam
+    Glue-laminated timber panels
+    Outdoor furniture
+    Indoor furniture/cabinet/joinery
+    Panelling/sarking
+    Benchtops
+    Trusses'.split("\n").map(&:strip)
   end
 
   def self.timber_species_options
