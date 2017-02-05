@@ -75,66 +75,95 @@ class Advert < ActiveRecord::Base
   end
 
   def self.buyer_of_options
-    ['Timber', 'Logs', 'Standing trees', 'Firewood']
+    %w(Timber Logs Standing\ trees Firewood)
   end
 
   def self.supplier_of_options
-    'Timber, logs, Sawmills, Machinery, Firewood, Trees, Structural Glulam, Glue-laminated timber panels, Outdoor furniture, Indoor furniture, Trusses'.split(', ')
+    %w(Timber
+    logs
+    Sawmills
+    Machinery
+    Firewood
+    Trees
+    Structural\ Glulam
+    Glue-laminated\ timber\ panels
+    Outdoor\ furniture
+    Indoor\ furniture/cabinet/joinery
+    Panelling/sarking
+    Benchtops
+    Trusses)
   end
 
   def self.timber_species_options
-    'Cypress
+    %w(Cypress
     Macrocarpa
     Redwood
     Eucalypt
-    Southern beech
+    Southern\ beech
     Totara
+    Kahikatea
+    Rimu
+    Matai
     Blackwood
+    Kauri
     Cedar
     Paulownia
     Poplar
     Oak
     Elm
+    Rata
     Spruce
-    Ash'.split("\n").map(&:strip)
+    Tawa
+    London\ plane
+    Sycamore
+    Larch
+    Tulipwood
+    Walnut
+    Ash)
   end
 
   def self.timber_for_sale_options
-    'Green sawn ungraded timber
-    Seasoned ungraded timber
-    Profiled and dressed ungraded timber
-    Structural graded timber
-    Flooring timber - graded
-    Timber for glue laminating - graded
-    Decking timber - graded
-    Cladding timber - graded
+    %w(Green\ sawn\ ungraded\ timber
+    Seasoned\ ungraded\ timber
+    Profiled\ and\ dressed\ ungraded\ timber
+    Structural\ graded\ timber
+    Flooring\ timber\ -\ graded
+    Timber\ for\ glue\ laminating\ -\ graded
+    Decking\ timber\ -\ graded
+    Cladding\ timber\ -\ graded
     Sleepers
-    Timber for furniture/joinery - graded
+    Timber\ for\ furniture/joinery\ -\ graded
     Slabs
-    Panelling timber - graded
-    Timber for structural glulam - graded'.split("\n").map(&:strip)
+    Panelling\ timber\ -\ graded
+    Mouldings\ and\ architraves\ -\ graded
+    Timber\ for\ structural\ glulam\ -\ graded)
   end
 
   def self.services_options
-    'Logging and harvesting
-    Log brokerage
-    Log transport
-    Timber transport
-    Sawmilling service
-    Kiln drying service
-    Machining and profiling
-    Glue laminating
-    Construction and building
+    %w(Logging\ and\ harvesting
+    Log\ brokerage
+    Log\ transport
+    Timber\ transport
+    Sawmilling\ service
+    Kiln\ drying\ service
+    Machining\ and\ profiling
+    Glue\ laminating
+    Construction\ and\ building
+    Registered\ architect
     Design
-    Structural engineer
-    Timber merchant
-    Floor laying and installation
-    Interior joinery furniture and fitouts
-    Exterior joinery and furniture
+    Structural\ engineer
+    Stress\ grading
+    Timber\ merchant
+    Floor\ laying\ and\ installation
+    Floor\ sanding\ and\ repairs
+    Decking\ installation
+    Interior\ joinery\ furniture\ and\ fitouts
+    Exterior\ joinery\ and\ furniture
     Manufacturing
     Retailer
     Cabinetmaking
-    Resawing'.split("\n").map(&:strip)
+    Resawing
+    Sustainable\ Forest\ Management\ plans\ and\ permits)
   end
 
   private
