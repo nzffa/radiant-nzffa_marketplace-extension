@@ -1,438 +1,82 @@
-
 <r:title/>
 <p>Members can place adverts <a href="/specialty-timber-market/participate/membership/">here</a>.<br>
 To join <a href="/specialty-timber-market/participate/">click here</a>.</p>
 
 <p> <big><b>Start typing into the search box or click on these terms...</big></b></p>
-<div>
-  <table style="text-align: left; " border="0" cellpadding="0"
-    cellspacing="0">
+
+  <table style="text-align: left; " border="0" cellpadding="0" cellspacing="0">
     <tbody>
       <tr>
-        <td style="vertical-align: top;"><a class="pop" href="#">Region<span>
-              <table style="text-align: left; width: 250px;" border="0" cellpadding="0"
-                cellspacing="0">
-                <tbody>
-                  <tr>
-                    <td style="vertical-align: top;">
-                      <a href="/adverts/?query=Northland">Northland</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="vertical-align: top;">
-                      <a href="/adverts/?query=Auckland">Auckland</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="vertical-align: top;">
-                      <a href="/specialty-timber-market/marketplace/?query=Waikato ">Waikato</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="vertical-align: top;">
-                      <a href="/adverts/?query=Bay of Plenty ">Bay of Plenty</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="vertical-align: top;">
-                      <a href="/adverts/?query=Gisborne ">Gisborne</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="vertical-align: top;">
-                      <a href="/adverts/?query=Hawkes Bay ">Hawkes Bay</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="vertical-align: top;">
-                      <a href="/adverts/?query=Wanganui Manawatu Wairarapa">Wanganui / Manawatu / Wairarapa</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="vertical-align: top;">
-                      <a href="/adverts/?query=Taranaki ">Taranaki</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="vertical-align: top;">
-                      <a href="/adverts/?query=Wellington ">Wellington</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="vertical-align: top;">
-                      <a href="/adverts/?query=Tasman ">Tasman</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="vertical-align: top;">
-                      <a href="/adverts/?query=Marlborough ">Marlborough</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="vertical-align: top;">
-                      <a href="/adverts/?query=Canterbury ">Canterbury</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="vertical-align: top;">
-                      <a href="/adverts/?query=West Coast ">West Coast</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="vertical-align: top;">
-                      <a href="/adverts/?query=Otago ">Otago</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="vertical-align: top;">
-                      <a href="/adverts/?query=Southland ">Southland</a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              </span></a>
-            </td>
-            <td style="vertical-align: top;">&nbsp; then/or &nbsp;
-            </td>
-            <td style="vertical-align: top;"><a class="pop" href="#">Timber species<span>
-                  <table style="text-align: left; width: 100px;" border="0" cellpadding="0"
+        <td style="vertical-align: top;">
+          <a class="pop" href="#">Region<span>
+            <table style="text-align: left; width: 250px;" border="0" cellpadding="0" cellspacing="0">
+              <tbody>
+                <% Advert::REGIONS.each do |option| %><tr>
+                  <td style="vertical-align: top;">
+                    <a href="/adverts/?query=<%= option -%>"><%= option -%></a>
+                  </td>
+                </tr><% end %>
+              </tbody>
+            </table>
+          </span></a>
+        </td>
+        <td style="vertical-align: top;">&nbsp; then/or &nbsp;</td>
+        <td style="vertical-align: top;">
+          <a class="pop" href="#">Timber species<span>
+            <table style="text-align: left; width: 100px;" border="0" cellpadding="0" cellspacing="0">
+              <tbody>
+                <% Advert.timber_species_options.each do |option| %><tr>
+                  <td style="vertical-align: top;">
+                    <a href="/adverts/?query=<%= option -%>"><%= option -%></a>
+                  </td>
+                </tr><% end %>
+              </tbody>
+            </table>
+          </span></a>
+        </td>
+        <td style="vertical-align: top;">&nbsp; then / or &nbsp;</td>
+        <td style="vertical-align: top;">
+          <a class="pop" href="#">Supplier of / Buyer of<span>
+            <table style="text-align: left; width: 200px;" border="0" cellpadding="0" cellspacing="0">
+              <tbody>
+                <% Advert.buyer_of_options.concat(Advert.supplier_of_options).map(&:capitalize).uniq.each do |option| %><tr>
+                  <td style="vertical-align: top;">
+                    <a href="/adverts/?query=<%= option -%>"><%= option -%></a>
+                  </td>
+                </tr><% end %>
+              </tbody>
+            </table>
+          </span></a>
+        </td>
+        <td style="vertical-align: top;">&nbsp; then / or &nbsp;</td>
+        <td style="vertical-align: top;">
+          <a class="pop" href="#">Timber for sale<span>
+            <table style="text-align: left; width: 250px;" border="0" cellpadding="0"
                     cellspacing="0">
-                    <tbody>
-                      <tr>
-                        <td style="vertical-align: top;">
-                          <a href="/adverts/?query=Cypress ">Cypress</a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="vertical-align: top;">
-                          <a href="/adverts/?query=Macrocarpa ">Macrocarpa</a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="vertical-align: top;">
-                          <a href="/adverts/?query=Cypress ">Cypress</a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="vertical-align: top;">
-                          <a href="/adverts/?query=Redwood ">Redwood</a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="vertical-align: top;">
-                          <a href="/adverts/?query=Eucalypt ">Eucalypt</a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="vertical-align: top;">
-                          <a href="/adverts/?query=Southern beech ">Southern beech</a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="vertical-align: top;">
-                          <a href="/adverts/?query=Totara ">Totara</a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="vertical-align: top;">
-                          <a href="/adverts/?query=Blackwood ">Blackwood</a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="vertical-align: top;">
-                          <a href="/adverts/?query=Cedar ">Cedar</a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="vertical-align: top;">
-                          <a href="/adverts/?query=Paulownia ">Paulownia</a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="vertical-align: top;">
-                          <a href="/adverts/?query=Poplar ">Poplar</a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="vertical-align: top;">
-                          <a href="/adverts/?query=Oak ">Oak</a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="vertical-align: top;">
-                          <a href="/adverts/?query=Elm ">Elm</a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="vertical-align: top;">
-                          <a href="/adverts/?query=Spruce ">Spruce</a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="vertical-align: top;">
-                          <a href="/adverts/?query=Ash ">Ash</a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="vertical-align: top;">
-                          <a href="/adverts/?query=Larch ">Larch</a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  </span></a>
-                </td>
-                <td style="vertical-align: top;">&nbsp; then / or &nbsp;
-                </td>
-                <td style="vertical-align: top;"><a class="pop" href="#">Supplier of / Buyer of<span>
-                      <table style="text-align: left; width: 200px;" border="0" cellpadding="0"
-                        cellspacing="0">
-                        <tbody>
-                          <tr>
-                            <td style="vertical-align: top;">
-                              <a href="/adverts/?query=Timber ">Timber</a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td style="vertical-align: top;">
-                              <a href="/adverts/?query=Logs ">Logs</a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td style="vertical-align: top;">
-                              <a href="/adverts/?query=Sawmills ">Sawmills</a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td style="vertical-align: top;">
-                              <a href="/adverts/?query=Machinery ">Machinery</a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td style="vertical-align: top;">
-                              <a href="/adverts/?query=Firewood ">Firewood</a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td style="vertical-align: top;">
-                              <a href="/adverts/?query=Trees ">Trees</a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td style="vertical-align: top;">
-                              <a href="/adverts/?query=Structural glulam ">Structural glulam</a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td style="vertical-align: top;">
-                              <a href="/adverts/?query=Glue-laminated timber panels ">Glue-laminated timber panels</a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td style="vertical-align: top;">
-                              <a href="/adverts/?query=Outdoor furniture ">Outdoor furniture</a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td style="vertical-align: top;">
-                              <a href="/adverts/?query=Indoor furniture ">Indoor furniture</a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td style="vertical-align: top;">
-                              <a href="/adverts/?query=Trusses ">Trusses</a>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      </span></a>
-                    </td>
-                    <td style="vertical-align: top;">&nbsp; then / or &nbsp;
-                    </td>
-                    <td style="vertical-align: top;"><a class="pop" href="#">Timber for sale<span>
-                          <table style="text-align: left; width: 250px;" border="0" cellpadding="0"
-                            cellspacing="0">
-                            <tbody>
-                              <tr>
-                                <td style="vertical-align: top;">
-                                  <a href="/adverts/?query=Green sawn ungraded timber ">Green sawn ungraded timber</a>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td style="vertical-align: top;">
-                                  <a href="/adverts/?query=Seasoned ungraded timber ">Seasoned ungraded timber</a>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td style="vertical-align: top;">
-                                  <a href="/adverts/?query=Profiled and dressed ungraded timber ">Profiled and dressed ungraded timber</a>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td style="vertical-align: top;">
-                                  <a href="/adverts/?query=Structural graded timber ">Structural graded timber</a>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td style="vertical-align: top;">
-                                  <a href="/adverts/?query=Flooring timber - graded ">Flooring timber - graded</a>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td style="vertical-align: top;">
-                                  <a href="/adverts/?query=Timber for glue laminating - graded ">Timber for glue laminating - graded</a>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td style="vertical-align: top;">
-                                  <a href="/adverts/?query=Decking timber - graded ">Decking timber - graded</a>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td style="vertical-align: top;">
-                                  <a href="/adverts/?query=Cladding timber - graded ">Cladding timber - graded</a>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td style="vertical-align: top;">
-                                  <a href="/adverts/?query=Sleepers ">Sleepers</a>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td style="vertical-align: top;">
-                                  <a href="/adverts/?query=Timber for furniture/joinery - graded ">Timber for furniture/joinery - graded</a>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td style="vertical-align: top;">
-                                  <a href="/adverts/?query=Slabs ">Slabs</a>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td style="vertical-align: top;">
-                                  <a href="/adverts/?query=Panelling timber - graded ">Panelling timber - graded</a>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td style="vertical-align: top;">
-                                  <a href="/adverts/?query=Timber for structural glulam - graded ">Timber for structural glulam - graded</a>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                          </span></a>
-                        </td>
-                        <td style="vertical-align: top;">&nbsp; then / or &nbsp;
-                        </td>
-                        <td style="vertical-align: top;"><a class="pop" href="#">Services<span>
-                              <table style="text-align: left; width: 200px;" border="0" cellpadding="0"
-                                cellspacing="0">
-                                <tbody>
-                                  <tr>
-                                    <td style="vertical-align: top;">
-                                      <a href="/adverts/?query=Logging and harvesting ">Logging and harvesting</a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td style="vertical-align: top;">
-                                      <a href="/adverts/?query=Log brokerage ">Log brokerage</a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td style="vertical-align: top;">
-                                      <a href="/adverts/?query=Log transport ">Log transport</a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td style="vertical-align: top;">
-                                      <a href="/adverts/?query=Timber transport ">Timber transport</a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td style="vertical-align: top;">
-                                      <a href="/adverts/?query=Sawmilling service ">Sawmilling service</a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td style="vertical-align: top;">
-                                      <a href="/adverts/?query=Kiln drying service ">Kiln drying service</a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td style="vertical-align: top;">
-                                      <a href="/adverts/?query=Machining and profiling ">Machining and profiling</a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td style="vertical-align: top;">
-                                      <a href="/adverts/?query=Glue laminating ">Glue laminating</a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td style="vertical-align: top;">
-                                      <a href="/adverts/?query=Construction and building ">Construction and building</a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td style="vertical-align: top;">
-                                      <a href="/adverts/?query=Design ">Design</a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td style="vertical-align: top;">
-                                      <a href="/adverts/?query=Architect ">Architect</a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td style="vertical-align: top;">
-                                      <a href="/adverts/?query=Structural engineer ">Structural engineer</a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td style="vertical-align: top;">
-                                      <a href="/adverts/?query=Timber merchant ">Timber merchant</a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td style="vertical-align: top;">
-                                      <a href="/adverts/?query=Floor laying and installation ">Floor laying and installation</a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td style="vertical-align: top;">
-                                      <a href="/adverts/?query=Interior joinery furniture and fitouts ">Interior joinery furniture and fitouts</a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td style="vertical-align: top;">
-                                      <a href="/adverts/?query=Exterior joinery and furniture ">Exterior joinery and furniture</a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td style="vertical-align: top;">
-                                      <a href="/adverts/?query=Manufacturing ">Manufacturing</a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td style="vertical-align: top;">
-                                      <a href="/adverts/?query=Retailer ">Retailer</a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td style="vertical-align: top;">
-                                      <a href="/adverts/?query=Cabinetmaking ">Cabinetmaking</a>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td style="vertical-align: top;">
-                                      <a href="/adverts/?query=Resawing ">Resawing</a>
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                              </span></a>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
+              <tbody>
+                <% Advert.timber_for_sale_options.each do |option| %><tr>
+                  <td style="vertical-align: top;">
+                    <a href="/adverts/?query=<%= option -%>"><%= option -%></a>
+                  </td>
+                </tr><% end %>
+              </tbody>
+            </table>
+          </span></a>
+        </td>
+        <td style="vertical-align: top;">&nbsp; then / or &nbsp;</td>
+        <td style="vertical-align: top;">
+          <a class="pop" href="#">Services<span>
+            <table style="text-align: left; width: 200px;" border="0" cellpadding="0" cellspacing="0">
+              <tbody>
+                <% Advert.services_options.each do |option| %><tr>
+                  <td style="vertical-align: top;">
+                    <a href="/adverts/?query=<%= option -%>"><%= option -%></a>
+                  </td>
+                </tr><% end %>
+              </tbody>
+            </table>
+          </span></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
