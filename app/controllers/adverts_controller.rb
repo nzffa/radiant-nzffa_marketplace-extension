@@ -51,6 +51,9 @@ class AdvertsController < MarketplaceController
   end
 
   def update
+    # Send empty select2 fields so the database is always updated
+    Advert::SERIALIZED_COLUMNS.each{|attrib| params[:advert][attrib] ||= [] }
+    
     if @advert.update_attributes(params[:advert])
       flash[:notice] = 'Advert was successfully updated.'
       if @advert.is_company_listing?

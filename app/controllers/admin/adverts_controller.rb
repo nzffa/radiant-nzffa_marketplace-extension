@@ -14,6 +14,9 @@ class Admin::AdvertsController < Admin::ResourceController
   end
 
   def update
+    # Send empty select2 fields so the database is always updated
+    Advert::SERIALIZED_COLUMNS.each{|attrib| params[:advert][attrib] ||= [] }
+    
     @advert.update_attributes params[:advert]
     flash[:notice] = 'Advert updated'
     response_for :update
