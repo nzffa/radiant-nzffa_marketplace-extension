@@ -66,6 +66,7 @@
   %p
     =f.label :timber_species
     %br
+    = f.hidden_field :timber_species
     =f.select :timber_species, options_for_select(Advert.timber_species_options.map{|o| [o,o] }, f.object.timber_species), {}, {:multiple => true, :style => 'width: 300px'}
     
 

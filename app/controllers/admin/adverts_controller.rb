@@ -33,7 +33,7 @@ class Admin::AdvertsController < Admin::ResourceController
 
   def destroy
     @advert.destroy
-  redirect_to [:admin, :adverts], :notice => 'Destroyed advert'
+    redirect_to :action => :index, :notice => 'Advert deleted'
   end
 
   protected

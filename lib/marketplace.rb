@@ -47,9 +47,4 @@ module Marketplace
         %{<div id="adverts"></div>
           <script type="text/javascript">$('#adverts').load('/membership/register')</script>}
   end
-
-  tag 'join-fft-button' do |tag|
-    %{<div id="join-fft-button"></div>
-      <script type="text/javascript">$('#join-fft-button').load('#{join_fft_button_path}')</script>}
-  end
 end

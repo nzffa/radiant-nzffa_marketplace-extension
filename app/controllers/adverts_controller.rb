@@ -3,7 +3,7 @@ class AdvertsController < MarketplaceController
 
   before_filter :load_company_listing, :only => [:my_adverts, :edit_company_listing]
   before_filter :load_advert, :only => [:edit, :update, :destroy, :renew, :email]
-  before_filter :require_current_reader, :only => [:my_adverts, :new, :create, :edit, :update, :edit_company_listing, :renew]
+  before_filter :require_reader, :only => [:my_adverts, :new, :create, :edit, :update, :edit_company_listing, :renew]
   before_filter :require_fft_group, :only => [:my_adverts, :new, :create, :edit, :update, :edit_company_listing, :renew]
 
 
@@ -47,7 +47,7 @@ class AdvertsController < MarketplaceController
   def renew
     @advert.update_attribute(:expires_on, 1.month.from_now)
     flash[:notice] = "Advert will expire on #{@advert.expires_on}"
-    redirect_to MY_ADVERTS_PATH
+    redirect_to :action => :my_adverts
   end
 
   def update
@@ -59,7 +59,7 @@ class AdvertsController < MarketplaceController
       if @advert.is_company_listing?
         redirect_to FFT_MEMBERS_AREA_PATH
       else
-        redirect_to MY_ADVERTS_PATH
+        redirect_to :action => :my_adverts
       end
     else
       @company_listing = @advert
@@ -82,16 +82,15 @@ class AdvertsController < MarketplaceController
       #save and respond
       if reader_result && @advert.save
         flash[:notice] = 'Advert was successfully created.'
-        redirect_to MY_ADVERTS_PATH
+        redirect_to :action => :my_adverts
       else
         render :action => 'edit_company_listing'
       end
     else
-
       @advert.expires_on = 1.month.from_now
       if @advert.save
         flash[:notice] = 'Advert was successfully created.'
-        redirect_to MY_ADVERTS_PATH
+        redirect_to :action => :my_adverts
       else
         render :action => "new"
       end
@@ -100,7 +99,7 @@ class AdvertsController < MarketplaceController
 
   def destroy
     @advert.destroy
-    redirect_to MY_ADVERTS_PATH
+    redirect_to :action => :my_adverts
   end
 
   protected
@@ -146,16 +145,11 @@ class AdvertsController < MarketplaceController
                   readers.post_line2
                   readers.region]
       terms = params[:query].split(' ')
-
       query = terms.map{ |term| fields.map { |field| "#{field} LIKE ?" }.join(" OR ")}.join(") AND (")
       query = "("+query+")"
       values = terms.map{ |term| ["%#{term}%"] * fields.size }.flatten
-
-
       find_options[:conditions] = [query, *values]
     end
-
-    # find_options[:joins] = :reader
 
     order_options = { 'title'          => 'adverts.title DESC',
                       'date'           => 'adverts.updated_at DESC',
@@ -169,7 +163,4 @@ class AdvertsController < MarketplaceController
     end
     find_options
   end
-
-
 end
-
