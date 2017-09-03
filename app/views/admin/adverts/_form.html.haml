@@ -1,110 +1,106 @@
--form_for [:admin, @advert], :html => {:multipart => true} do |f|
-  =f.error_messages
-  %br
-  =f.label 'Company Listing'
-  =f.check_box :is_company_listing
-  %br
-  =f.label :categories
-  =select_tag 'advert[categories]', options_for_select(Advert::CATEGORIES, f.object.categories), :multiple => true
-  %br
-  =f.label 'Expires on'
-  =f.text_field :expires_on, :class => 'ui-datepicker'
-  %br
-  =f.label :title
-  =f.text_field :title
-  %br
-  =f.label :body
-  =f.text_area :body
-  %br
-  =f.label :image
-  =f.file_field :image
-  -f.fields_for :reader do |rf|
-    %p
-      =rf.label :company_name
-      %br
-      =rf.text_field :organisation
-    =f.label :Region
-    %br
-    =select_tag 'advert[reader_attributes][region]', options_for_select(['Please Select', Advert::REGIONS].flatten, rf.object.region)
-    %p
-      =rf.label :contact_person
-      %br
-      =rf.text_field :contact_person
-    %p
-      =label_tag 'Phone'
-      %br
-      =rf.text_field :phone
-    %p
-      =rf.label :fax
-      %br
-      =rf.text_field :fax
-    %p
-      =rf.label :mobile
-      %br
-      =rf.text_field :mobile
-    %p
-      =rf.label :email
-      %br
-      =rf.text_field :email
-    %p
-      =label_tag 'Postal Address'
-      %br
-      =rf.text_field :post_line1
-      %br
-      =rf.text_field :post_line2
-      %br
-      =rf.text_field :post_city
-      %br
-      =rf.text_field :post_country
-      %br
-      Postcode:
-      =rf.text_field :postcode
-    %p
-      =label_tag 'Physical Address'
-      %br
-      =rf.text_area :physical_address
-
-    %p
-      =rf.label :website
-      %br
-      =rf.text_field :website
-
+=f.error_messages
+=f.label 'Reader'
+=f.collection_select :reader_id, Reader.all, :id, :name
+%br
+.left{:style => "width: 50%; float: left"}
+  %p{:style => "width: 50%; float:right"}
+    =f.label 'Company Listing'
+    =f.check_box :is_company_listing
+  %p
+    =f.label :categories
+    =select_tag 'advert[categories]', options_for_select(Advert::CATEGORIES, f.object.categories), :multiple => true
+  %p
+    =f.label 'Expires on'
+    =f.text_field :expires_on, :class => 'date'
+  %p
+    =f.label :title
+    =f.text_field :title
+  %p
+    =f.label :body
+    =f.text_area :body, :size => "50x14", :style => "width: 90%"
+  %p
+    =f.label :image
+    =f.file_field :image      
   %p
     =f.label :business_description
-    %br
-    =f.text_area :business_description
+    =f.text_area :business_description, :size => "50x14", :style => "width: 90%"
 
   %p
     =f.label :timber_species
-    %br
-    =f.hidden_field :timber_species, :style => 'width: 300px'
+    =select_tag 'advert[timber_species]', options_for_select(Advert.timber_species_options.map{|o| [o,o] }, f.object.timber_species), :multiple => true, :style => 'width: 300px'
 
   %p
     =f.label :timber_for_sale
-    %br
-    =select_tag 'advert[timber_for_sale_terms]', options_for_select(Advert.timber_for_sale_options.map{|o| [o,o] }, f.object.timber_for_sale_terms), :multiple => true, :style => 'width: 300px'
+    =select_tag 'advert[timber_for_sale]', options_for_select(Advert.timber_for_sale_options.map{|o| [o,o] }, f.object.timber_for_sale), :multiple => true, :style => 'width: 300px'
 
   %p
     =f.label :buyer_of
-    %br
-    =f.hidden_field :buyer_of,  :style => 'width: 300px'
-
+    =select_tag 'advert[buyer_of]', options_for_select(Advert.buyer_of_options.map{|o| [o,o] }, f.object.buyer_of), :multiple => true, :style => 'width: 300px'
+  
   %p
     =f.label :supplier_of
-    %br
-    =f.hidden_field :supplier_of,  :style => 'width: 300px'
+    =select_tag 'advert[supplier_of]', options_for_select(Advert.supplier_of_options.map{|o| [o,o] }, f.object.supplier_of), :multiple => true, :style => 'width: 300px'
 
   %p
     =f.label :services
-    %br
-    =f.hidden_field :services, :style => 'width: 300px'
+    =select_tag 'advert[services]', options_for_select(Advert.services_options.map{|o| [o,o] }, f.object.services), :multiple => true, :style => 'width: 300px'
+    
+.right{:style => "width: 50%; float: right"}
+  -f.fields_for :reader do |rf|
+    %p
+      =rf.label :company_name
+      =rf.text_field :organisation
+  
+    %p
+      =f.label :Region
+      =select_tag 'advert[reader_attributes][region]', options_for_select(['Please Select', Advert::REGIONS].flatten, rf.object.region)
+    %p
+      =rf.label :contact_person
+      =rf.text_field :contact_person
+    %p
+      =label_tag 'Phone'
+      =rf.text_field :phone
+    %p
+      =rf.label :fax
+      =rf.text_field :fax
+    %p
+      =rf.label :mobile
+      =rf.text_field :mobile
+    %p
+      =rf.label :email
+      =rf.text_field :email
+    %p
+      =rf.label :website
+      =rf.text_field :website
+    %p
+      =label_tag 'Postal Address'
+      =rf.text_field :post_line1, :placeholder => 'Line 1'
+      %br
+      =rf.text_field :post_line2, :placeholder => 'Line 2'
+      %br
+      =rf.text_field :post_city, :placeholder => 'City'
+      %br
+      =rf.text_field :post_country, :placeholder => 'Country'
+      %br
+      Postcode:
+      =rf.text_field :postcode, :placeholder => 'Postcode'
+    %p
+      =label_tag 'Physical Address'
+      =rf.text_area :physical_address, :size => "50x14", :style => "width: 90%"
 
-  %p
-    =f.submit
+.clear{:style => "clear: both"}
+  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/javascripts/jquery-1.6.2.min.js"><\/script>'); var jq = $.noConflict();</script>
+<script src='/javascripts/select2.min.js' type='text/javascript'></script>
+<link rel="stylesheet" href="/stylesheets/select2.css" type="text/css" media="screen" />
 
 :javascript
-  $('#advert_timber_species').select2({tags: #{Advert.timber_species_options.to_json}});
-  $('#advert_timber_for_sale_terms').select2();
-  $('#advert_buyer_of').select2({tags: #{Advert.buyer_of_options.to_json}});
-  $('#advert_supplier_of').select2({tags: #{Advert.supplier_of_options.to_json}});
-  $('#advert_services').select2({tags: #{Advert.services_options.to_json}});
+  jq(function() {
+    jq('#advert_timber_species').select2()
+    jq('#advert_timber_for_sale').select2()
+    jq('#advert_buyer_of').select2()
+    jq('#advert_supplier_of').select2()
+    jq('#advert_services').select2()
+    jq('#advert_categories').select2()
+  })
