@@ -30,7 +30,7 @@ class Advert < ActiveRecord::Base
 
   belongs_to :reader
   named_scope :not_expired, lambda { {:conditions => ['(adverts.expires_on > ? OR adverts.is_company_listing = ?) AND groups.id = ? AND subscriptions.expires_on >= ? AND subscriptions.begins_on <= ? AND subscriptions.cancelled_on IS NULL', Date.today, true, Group.fft_group, Date.today, Date.today], :include => [:reader => [:groups, :subscriptions]] }}
-  
+
   named_scope :published, lambda { {:conditions => {:is_published => true}} }
   named_scope :company_listings, {:conditions => {:is_company_listing => true }}
   named_scope :not_company_listings, {:conditions => {:is_company_listing => false }}
@@ -40,7 +40,7 @@ class Advert < ActiveRecord::Base
 
   validates_length_of :title, :minimum => 3, :unless => :is_company_listing
   validates_length_of :body, :minimum => 15, :unless => :is_company_listing
-  #validate :one_company_listing_per_reader
+  validate :one_company_listing_per_reader
 
   accepts_nested_attributes_for :reader
 
@@ -166,7 +166,7 @@ class Advert < ActiveRecord::Base
   def one_company_listing_per_reader
     if is_company_listing?
       existing = Advert.find(:all, :conditions => {:is_company_listing => true, :reader_id => reader_id})
-      if existing.size > 1
+      if existing.any?
         self.errors.add(:is_company_listing, "There is already a company listing for this reader id #{reader_id} n: #{existing.size}")
       end
     end
