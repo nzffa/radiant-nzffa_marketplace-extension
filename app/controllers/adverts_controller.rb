@@ -17,7 +17,7 @@ class AdvertsController < MarketplaceController
   end
 
   def index
-    @adverts = Advert.not_expired.paginate(:all, index_params)
+    @adverts = Advert.not_expired.find(:all, index_params).paginate(pagination_params)
     render :layout => false if request.xhr?
   end
 
@@ -53,7 +53,7 @@ class AdvertsController < MarketplaceController
   def update
     # Send empty select2 fields so the database is always updated
     Advert::SERIALIZED_COLUMNS.each{|attrib| params[:advert][attrib] ||= [] }
-    
+
     if @advert.update_attributes(params[:advert])
       flash[:notice] = 'Advert was successfully updated.'
       if @advert.is_company_listing?
@@ -68,8 +68,8 @@ class AdvertsController < MarketplaceController
   end
 
   # this method is ugly because life is ugly
-  # in short: the nice way to write this works fine in dev but fails 
-  # mysteriously in production... 
+  # in short: the nice way to write this works fine in dev but fails
+  # mysteriously in production...
   def create
     reader_attrs = params[:advert].delete(:reader_attributes)
     @advert = Advert.new params[:advert]
@@ -117,7 +117,7 @@ class AdvertsController < MarketplaceController
     @advert = Advert.find params[:id], :conditions => {:reader_id => current_reader.id}
   end
 
-  def index_params
+  def pagination_params
     find_options = {}
     if params[:page] and params[:page].to_i > 0
       find_options[:page] = params[:page]
@@ -125,6 +125,11 @@ class AdvertsController < MarketplaceController
       find_options[:page] = 1
     end
     find_options[:per_page] = 8
+    find_options
+  end
+
+  def index_params
+    find_options = {}
 
     unless params[:query].blank?
       fields = %w[categories
