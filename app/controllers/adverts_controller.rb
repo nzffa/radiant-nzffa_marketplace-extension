@@ -27,7 +27,7 @@ class AdvertsController < MarketplaceController
   end
 
   def index_table
-    @adverts = Advert.not_expired.paginate(:all, index_params)
+    @adverts = Advert.not_expired.find(:all, index_params).paginate(pagination_params)
     render :partial => 'table', :layout => false
   end
 
@@ -114,7 +114,7 @@ class AdvertsController < MarketplaceController
   end
 
   def load_advert
-    @advert = Advert.find params[:id], :conditions => {:reader_id => current_reader.id}
+    @advert = Advert.find params[:id], :conditions => { :reader_id => current_reader.id }
   end
 
   def pagination_params
