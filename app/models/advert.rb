@@ -40,7 +40,7 @@ class Advert < ActiveRecord::Base
 
   validates_length_of :title, :minimum => 3, :unless => :is_company_listing
   validates_length_of :body, :minimum => 15, :unless => :is_company_listing
-  validate :one_company_listing_per_reader
+  before_create :validate_one_company_listing_per_reader
 
   accepts_nested_attributes_for :reader
 
@@ -163,7 +163,7 @@ class Advert < ActiveRecord::Base
   end
 
   private
-  def one_company_listing_per_reader
+  def validate_one_company_listing_per_reader
     if is_company_listing?
       existing = Advert.find(:all, :conditions => {:is_company_listing => true, :reader_id => reader_id})
       if existing.any?
