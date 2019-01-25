@@ -48,7 +48,7 @@ namespace :radiant do
         Advert.find(:all, :conditions =>
                     {:expires_on => 7.days.from_now.to_date}).each do |advert|
           ExpiryMailer.deliver_warning_email(advert)
-          puts "Emailed: #{advert.reader.email}"
+          puts "Emailed #{advert.reader.email}; advert ##{advert.id} expires on #{7.days.from_now.to_date}."
         end
       end
     end
